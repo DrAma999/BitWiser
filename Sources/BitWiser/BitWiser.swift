@@ -3,23 +3,29 @@ import Foundation
 public struct BitWiser {
     
     static func changeBit(_ value: Byte, at index: Int, to bit: Bit) -> Byte {
-        (value & ~(1 << index)) | (bit.rawValue << index)
+        precondition(index <= 7, "Index must be lower than 8. A byte can only have 8 bits and index starts from 0")
+        return (value & ~(1 << index)) | (bit.rawValue << index)
     }
     
     static func setBit(_ value: Byte, at index: Int) -> Byte {
-        value | ( 1 << index)
+        precondition(index <= 7, "Index must be lower than 8. A byte can only have 8 bits and index starts from 0")
+        return value | ( 1 << index)
     }
     
     static func resetBit(_ value: Byte, at index: Int) -> Byte {
-        value & ~( 1 << index)
+        precondition(index <= 7, "Index must be lower than 8. A byte can only have 8 bits and index starts from 0")
+        return value & ~( 1 << index)
     }
     
     static func toggleBit(_ value: Byte, at index: Int) -> Byte {
-        value ^ ( 1 << index)
+        precondition(index <= 7, "Index must be lower than 8. A byte can only have 8 bits and index starts from 0")
+        return value ^ ( 1 << index)
     }
     
-    static func bit(_ value: Byte, at index: Int) -> Byte {
-        (value & ( 1 << index )) >> index
+    static func bit(_ value: Byte, at index: Int) -> Bit {
+        precondition(index <= 7, "Index must be lower than 8. A byte can only have 8 bits and index starts from 0")
+        let bit = (value & ( 1 << index )) >> index
+        return Bit(rawValue: bit)!
     }
     
     /// Check if a bit is set at a specific index
