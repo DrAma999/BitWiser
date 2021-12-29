@@ -80,41 +80,30 @@ public extension Byte {
         return BitWiser.changeBit(self, at: position, to: bit)
     }
     
-    @discardableResult
     /// Set a bit to one at a specific position
     /// - Parameter position: position of the bit
-    /// - Returns: a modified value with the bit set to one
-    mutating func setBit(_ position: Int) -> Self {
+    mutating func setBit(_ position: Int) {
         self = BitWiser.setBit(self, at: position)
-        return self
     }
     
-    @discardableResult
     /// Set a bit to zero at a specific position
     /// - Parameter position: position of the bit
-    /// - Returns: a modified value with the bit set to zero
-    mutating func resetBit(_ position: Int) -> Self {
+    mutating func resetBit(_ position: Int) {
         self = BitWiser.resetBit(self, at: position)
-        return self
     }
-    
+
     /// Toggle a bit value at a specific position
     /// - Parameter position: position of the bit
-    /// - Returns: a modified value with the bit  toggled if 0 to 1 if 1 to 0
-    mutating func toggleBit(_ position: Int) -> Self {
+    mutating func toggleBit(_ position: Int) {
         self = BitWiser.toggleBit(self, at: position)
-        return self
     }
     
-    @discardableResult
     /// Set a bit to a value at a specific position
     /// - Parameters:
     ///   - position: position of the bit
     ///   - bit: value of the `Bit` could be zero or one
-    /// - Returns: a modified value with the bit changed to a specific value
-    mutating func changeBit(_ position: Int, to bit: Bit) -> Self {
+    mutating func changeBit(_ position: Int, to bit: Bit) {
         self = BitWiser.changeBit(self, at: position, to: bit)
-        return self
     }
     
     /// Get or set the value of the bit at 0 positon
