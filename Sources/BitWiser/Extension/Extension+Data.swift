@@ -6,10 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
-public extension Data {
-    var bytes: [Byte] {
+extension Data: ByteRepresentable {
+  
+    public var bytes: [Byte] {
         return [Byte](self)
+    }
+    
+    public init(bytes: [Byte]) {
+        self = Data(bytes)
     }
 }
 

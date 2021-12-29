@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+public protocol ByteRepresentable {
+    var bytes: [Byte] { get }
+    init(bytes: [Byte])
+}
