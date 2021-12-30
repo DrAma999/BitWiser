@@ -8,6 +8,13 @@ Bitwiser is a collection of methods and properties that makes you work with `bit
 
 The project is in early stages of development feel free to make pull requests for more funcionalities
 
+## FEATURES
+
+## INSTALLATION
+
+## HOW TO USE IT
+
+
 ## CONTRIBUTING
 Since I'm working on this project in my spare time any help is appreciated.
 Feel free to make a pull request.

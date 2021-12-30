@@ -37,4 +37,31 @@ final class BitWiserTests: XCTestCase {
         
     }
     
+    func testDecodeHexStringToData() throws {
+        let dataString = "DEADBEEF"
+        let data = dataString.hexDecodedData()
+        let bytes = dataString.hexDecodedByte()
+        let revertDataString = data.hexEncodedString(options: .upperCase)
+        let revertDataFromBytes = Data(bytes: bytes)
+        XCTAssertEqual(revertDataString, dataString)
+        XCTAssertEqual(revertDataFromBytes, data)
+    }
+    
+    func testFirstBitSet() throws {
+        var value = Byte(0b0101_1110)
+        var index = try XCTUnwrap(BitWiser.firstTrailBitSetIndex(value))
+        XCTAssertEqual(index, 1)
+        
+        value = Byte(0b0101_1111)
+        index = try XCTUnwrap(BitWiser.firstTrailBitSetIndex(value))
+        XCTAssertEqual(index, 0)
+        
+        value = Byte(0b1000_0000)
+        index = try XCTUnwrap(BitWiser.firstTrailBitSetIndex(value))
+        XCTAssertEqual(index, 7)
+        
+        value = Byte(0)
+        XCTAssertNil(BitWiser.firstTrailBitSetIndex(value))
+    }
+    
 }

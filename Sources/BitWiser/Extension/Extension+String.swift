@@ -10,7 +10,8 @@ import Foundation
 public extension String {
     /// Given a hex string it returns a Data
     /// - Returns: a `Data` value
-    /// - Note: It doesn not validate input, string must be even and only hex alphabet thanks to https://stackoverflow.com/questions/39075043/how-to-convert-data-to-hex-string-in-swift
+    /// - Note: It does not validate input, string must be even and only hex alphabet thanks to https://stackoverflow.com/questions/39075043/how-to-convert-data-to-hex-string-in-swift
+    /// - Important: Indexing is resolved here as first pair as LSB es: "DEAD" prints DE-AD
     func hexDecodedData() -> Data {
         // Get the UTF8 characters of this string
         let chars = Array(utf8)
@@ -38,6 +39,7 @@ public extension String {
     }
     
     func hexDecodedByte() -> [Byte] {
+        // Need a further reverse since hexDecoded alredy in right format
         return hexDecodedData()
             .bytes
     }

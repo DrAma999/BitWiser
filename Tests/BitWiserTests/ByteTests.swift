@@ -167,6 +167,9 @@ class ByteTests: XCTestCase {
         let refValue: Byte = 0b00000000
         for (index, testValue) in testValues.enumerated() {
             var result = refValue.settingBit(index)
+            XCTAssert(result[index] == .one)
+            XCTAssert(result.isBitSet(index) == true)
+            XCTAssert(result.bit(index) == .one)
             XCTAssert(result == testValue)
             result.resetBit(index)
             XCTAssert(result == refValue)
@@ -177,6 +180,8 @@ class ByteTests: XCTestCase {
             XCTAssert(result == testValue)
             result = result.togglingBit(index)
             XCTAssert(result == refValue)
+            XCTAssert(result.isBitSet(index) == false)
+            XCTAssert(result.bit(index) == .zero)
         }
         
         // Test mutating methods
@@ -219,6 +224,12 @@ class ByteTests: XCTestCase {
         refMutValue = 0b11111111
         for (index, testValue) in testMutValues.reversed().enumerated() {
             refMutValue.toggleBit(count - index)
+            XCTAssert(refMutValue == testValue)
+        }
+        
+        refMutValue = 0b11111111
+        for (index, testValue) in testMutValues.reversed().enumerated() {
+            refMutValue[count - index] = .zero
             XCTAssert(refMutValue == testValue)
         }
        

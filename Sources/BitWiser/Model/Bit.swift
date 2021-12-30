@@ -29,12 +29,16 @@ extension Bit: CustomDebugStringConvertible {
 }
 
 public extension Array where Element == Bit {
+    /// Get a byte from 8 `Bit` array
+    /// - Important: lsb is always at index 0
     var byte: Byte {
         get throws {
             try BitWiser.byte(bits: self)
         }
     }
     
+    /// Get a bytes from % 8 `Bit` array.
+    /// - Important: LSB is always at index 0, eventual Endianess must be taken into account
     var bytes: [Byte] {
         get throws {
             try BitWiser.bytes(bits: self)

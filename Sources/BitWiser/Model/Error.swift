@@ -8,7 +8,7 @@
 import Foundation
 
 public extension BitWiser {
-    enum Error: CustomNSError, LocalizedError {
+    enum Error: CustomNSError, LocalizedError, Equatable {
         case wrongBitCount(count: Int)
     }
 }

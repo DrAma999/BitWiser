@@ -32,7 +32,6 @@ public extension Data {
         }
     }
     
-    
     /// Returns a hex representation of the given data value
     /// - Parameter options: `HexEncodingOptions` option
     /// - Returns: a hex encoded string

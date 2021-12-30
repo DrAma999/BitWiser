@@ -12,7 +12,8 @@ public typealias Byte = UInt8
 // MARK: Computed properties
 public extension Byte {
     
-    /// Returns the `Bit` represention of a specific byte in an array
+    /// Returns the `Bit` represention of a specific byte in an array.
+    ///  Index 0 is the lsb
     var bits: [Bit] {
         let bitsOfAbyte = 8
         var bitsArray = [Bit](repeating: Bit.zero, count: bitsOfAbyte)
@@ -25,7 +26,7 @@ public extension Byte {
                 bitsArray[index] = Bit.one
             }
         }
-        return bitsArray
+        return bitsArray.reversed()
     }
     
     /// Returns the `Nibble` represention
@@ -37,7 +38,7 @@ public extension Byte {
        
 }
 
-// MARK: Bit manipulation
+// MARK: Bit manipulation, bit reading
 public extension Byte {
     /// Subscript to read or write a `Byte` at specific index
     subscript(position: Int) -> Bit {
@@ -49,6 +50,19 @@ public extension Byte {
         }
     }
     
+    /// Query a bit in a specific position if it is one
+    /// - Parameter position: index of the bit from 0...7
+    /// - Returns: A boolean value. True if is set,  false if not
+    func isBitSet(_ position: Int) -> Bool {
+        return BitWiser.isBitSet(self, at: position)
+    }
+    
+    /// Query a bit value in a specific position
+    /// - Parameter position: index of the bit from 0...7
+    /// - Returns: The `Bit` representation of the value
+    func bit(_ position: Int) -> Bit {
+        return BitWiser.bit(self, at: position)
+    }
     
     /// Set a bit to one at a specific position
     /// - Parameter position: position of the bit
