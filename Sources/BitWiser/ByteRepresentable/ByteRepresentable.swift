@@ -7,7 +7,6 @@
 
 import Foundation
 
-public protocol ByteRepresentable {
-    var bytes: [Byte] { get }
+public protocol ByteRepresentable: BytesConvertible {
     init(bytes: [Byte])
 }
