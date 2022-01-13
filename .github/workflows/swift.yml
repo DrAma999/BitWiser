@@ -18,4 +18,5 @@ jobs:
     - name: Run tests
       run: |
         swift test -v --enable-code-coverage
+        llvm-cov export -format="lcov" .build/debug/BitWiserPackageTests.xctest -instr-profile .build/debug/codecov/default.profdata > info.lcov
         bash <(curl -s https://codecov.io/bash)
