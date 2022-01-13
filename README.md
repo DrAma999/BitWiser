@@ -2,6 +2,10 @@
   <img width="200" height="200" src="README/Icon.png">
 </p>
 
+![Swift](https://github.com/DrAma999/LittleBlueTooth/workflows/Swift/badge.svg?branch=master)
+[![codecov](https://codecov.io/gh/DrAma999/BitWiser/branch/main/graph/badge.svg?token=Y3TXZ5NQN7)](https://codecov.io/gh/DrAma999/BitWiser)
+
+
 # BitWiser
 
 Bitwiser is a collection of methods and properties that makes you work with `bits`, `bytes` and `nibbles` a piece of cake
