@@ -18,5 +18,9 @@ jobs:
     - name: Run tests
       run: |
         swift test -v --enable-code-coverage
-        llvm-cov export -format="lcov" .build/debug/BitWiserPackageTests.xctest -instr-profile .build/debug/codecov/default.profdata > info.lcov
-        bash <(curl -s https://codecov.io/bash)
+    - name: Xcode Tests
+      run: |
+        swift package generate-xcodeproj
+        xcodebuild -quiet -parallel-testing-enabled YES -scheme swift-base64-kit-Package -enableCodeCoverage YES build test
+    - name: Codecov
+      run: bash <(curl -s https://codecov.io/bash) -t ${{secrets.CODECOV_TOKEN}} -f *.coverage.txt
