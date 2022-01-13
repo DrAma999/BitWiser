@@ -4,6 +4,7 @@
 
 ![Swift](https://github.com/DrAma999/LittleBlueTooth/workflows/Swift/badge.svg?branch=master)
 [![codecov](https://codecov.io/gh/DrAma999/BitWiser/branch/main/graph/badge.svg?token=Y3TXZ5NQN7)](https://codecov.io/gh/DrAma999/BitWiser)
+[![CodeFactor](https://www.codefactor.io/repository/github/drama999/bitwiser/badge/main)](https://www.codefactor.io/repository/github/drama999/bitwiser/overview/main)
 
 
 # BitWiser
