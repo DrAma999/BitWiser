@@ -21,6 +21,6 @@ jobs:
     - name: Xcode Tests
       run: |
         swift package generate-xcodeproj
-        xcodebuild -quiet -parallel-testing-enabled YES -scheme swift-base64-kit-Package -enableCodeCoverage YES build test
+        xcodebuild -quiet -parallel-testing-enabled YES -scheme BitWiser -enableCodeCoverage YES build test
     - name: Codecov
       run: bash <(curl -s https://codecov.io/bash) -t ${{secrets.CODECOV_TOKEN}} -f *.coverage.txt
