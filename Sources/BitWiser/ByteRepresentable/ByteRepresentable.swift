@@ -7,7 +7,12 @@
 
 import Foundation
 
-public protocol ByteRepresentable {
-    var bytes: [Byte] { get }
+public protocol ExpressibleByBytes {
     init(bytes: [Byte])
 }
+
+public protocol ByteConvertible {
+    var bytes: [Byte] { get }
+}
+
+public typealias ByteRepresentable = ExpressibleByBytes & ByteConvertible
