@@ -7,7 +7,7 @@
 
 import Foundation
 
-//MARK: - Signed Numeric
+// MARK: - Signed Numeric
 
 extension Int16: ByteConvertible {
     public var bytes: [Byte] {
