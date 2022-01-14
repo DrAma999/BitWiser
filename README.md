@@ -27,7 +27,7 @@ The project is in early stages of development feel free to make pull requests fo
 Use Swift package manager.
 Add the following dependency to your Package.swift file:
 ```
-.package(url: "https://github.com/DrAma999/BitWiser.git", from: "0.0.1")
+.package(url: "https://github.com/DrAma999/BitWiser.git", from: "0.0.2")
 ```
 Or simply add the URL from XCode menu Swift packages.
 
