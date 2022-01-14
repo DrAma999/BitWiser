@@ -17,7 +17,7 @@ public extension Byte {
     var bits: [Bit] {
         let bitsOfAbyte = 8
         var bitsArray = [Bit](repeating: Bit.zero, count: bitsOfAbyte)
-        for (index, _) in bitsArray.enumerated() {
+        for index in bitsArray.indices {
             // Bitwise shift to clear unrelevant bits
             let bitVal: UInt8 = 1 << UInt8(bitsOfAbyte - 1 - index)
             let check = self & bitVal
