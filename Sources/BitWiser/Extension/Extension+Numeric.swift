@@ -9,19 +9,19 @@ import Foundation
 
 //MARK: - Signed Numeric
 
-extension Int16: BytesConvertible {
+extension Int16: ByteConvertible {
     public var bytes: [Byte] {
         withUnsafeBytes(of: self.littleEndian, Array.init)
     }
 }
 
-extension Int32: BytesConvertible {
+extension Int32: ByteConvertible {
     public var bytes: [Byte] {
         withUnsafeBytes(of: self.littleEndian, Array.init)
     }
 }
 
-extension Int64: BytesConvertible {
+extension Int64: ByteConvertible {
     public var bytes: [Byte] {
         withUnsafeBytes(of: self.littleEndian, Array.init)
     }
@@ -29,19 +29,19 @@ extension Int64: BytesConvertible {
 
 // MARK: - Unsigned Numeric
 
-extension UInt16: BytesConvertible {
+extension UInt16: ByteConvertible {
     public var bytes: [Byte] {
         withUnsafeBytes(of: self.littleEndian, Array.init)
     }
 }
 
-extension UInt32: BytesConvertible {
+extension UInt32: ByteConvertible {
     public var bytes: [Byte] {
         withUnsafeBytes(of: self.littleEndian, Array.init)
     }
 }
 
-extension UInt64: BytesConvertible {
+extension UInt64: ByteConvertible {
     public var bytes: [Byte] {
         withUnsafeBytes(of: self.littleEndian, Array.init)
     }
