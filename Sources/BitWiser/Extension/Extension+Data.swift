@@ -44,3 +44,9 @@ public extension Data {
         }.joined(separator: padding)
     }
 }
+
+public extension Data {
+    init(@ByteArrayBuilder _ builder: () -> [Byte]) {
+        self.init(bytes: builder())
+    }
+}
