@@ -72,42 +72,66 @@ class DSLTests: XCTestCase {
     func testArrayOfBytesFromVaridicBytes() throws {
         let value = buildArrayOfBytesFromVaridicBytes()
         value.enumerated().forEach { (index, value) in
-            XCTAssertTrue(index == value)
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
         }
     }
     
     func testArrayOfBytesFromVaridicByteArrayOfBytes() throws {
         let value = buildArrayOfBytesFromVaridicByteArrayOfBytes()
         value.enumerated().forEach { (index, value) in
-            XCTAssertTrue(index == value)
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
         }
     }
     
     func testArrayOfBytesFromVaridicMixedByteArrayOfBytes() throws {
         let value = buildArrayOfBytesFromVaridicMixedByteArrayOfBytes()
         value.enumerated().forEach { (index, value) in
-            XCTAssertTrue(index == value)
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
         }
     }
     
     func testArrayOfBytesFromVaridicMixedByteArrayOfBytesIfClause() throws {
         let value = buildArrayOfBytesFromVaridicMixedByteArrayOfBytesIfClause()
         value.enumerated().forEach { (index, value) in
-            XCTAssertTrue(index == value)
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
         }
     }
     
     func testArrayOfBytesFromVaridicMixedByteArrayOfBytesIfElseClause() throws {
         let value = buildArrayOfBytesFromVaridicMixedByteArrayOfBytesIfElseClause()
         value.enumerated().forEach { (index, value) in
-            XCTAssertTrue(index == value)
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
         }
     }
     
     func testArrayOfBytesFromVaridicMixedByteArrayOfBytesLoop() throws {
         let value = buildArrayOfBytesFromVaridicMixedByteArrayOfBytesLoop()
         value.enumerated().forEach { (index, value) in
-            XCTAssertTrue(index == value)
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
         }
+    }
+    
+    func testDataConversion() throws {
+        let value = UInt16(0b1100_1100_1010_1010)
+        let bytes = value.bytes
+        let dataFromValue = Data(bytes: bytes)
+        
+        let dslData = Data {
+            0b1010_1010
+            0b1100_1100
+        }
+        
+        let dslByteArray = Array<Byte> {
+            0b1010_1010
+            0b1100_1100
+        }
+        XCTAssertEqual(dslByteArray, bytes)
+        XCTAssertEqual(dslData, dataFromValue)
     }
 }

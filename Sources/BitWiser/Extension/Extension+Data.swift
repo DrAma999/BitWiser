@@ -46,6 +46,17 @@ public extension Data {
 }
 
 public extension Data {
+    /// Initialize a `Data` with a `@ByteArrayBuilder`.
+    ///
+    ///     Data {
+    ///         [Byte(0x00)]
+    ///         Byte(0x01)
+    ///         0x02
+    ///         [UInt8(0x03)]
+    ///     }
+    ///     
+    /// - parameter builder: A DSL closure with `Byte`s.
+    /// - Important: Always start from the LSB
     init(@ByteArrayBuilder _ builder: () -> [Byte]) {
         self.init(bytes: builder())
     }

@@ -7,8 +7,10 @@
 
 import Foundation
 
+
+/// `ByteArrayBuilder` is a `@resultBuilder` to create sequence of `Byte` in a DSL style
 @resultBuilder
-public struct ByteArrayBuilder {
+public enum ByteArrayBuilder {
     
     public static func buildBlock(_ components: [Byte]...) -> [Byte] {
         components.flatMap { $0 }
