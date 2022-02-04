@@ -134,4 +134,36 @@ class DSLTests: XCTestCase {
         XCTAssertEqual(dslByteArray, bytes)
         XCTAssertEqual(dslData, dataFromValue)
     }
+    
+    @DataConvertibleBuilder func buildDataFromVaridicData() -> Data {
+        UInt8(0)
+        UInt8(1)
+        UInt8(2)
+        UInt8(3)
+        UInt8(4)
+    }
+    
+    @DataConvertibleBuilder func buildDataFromVaridicDataArrayOfData() -> Data {
+        [UInt8(0)]
+        [UInt8(1)]
+        [UInt8(2)]
+        [UInt8(3)]
+        [UInt8(4)]
+    }
+    
+    @DataConvertibleBuilder func buildDataFromVaridicMixedData() -> Data {
+        [UInt8(0)]
+        UInt8(1)
+        Int8(2)
+        "\u{03}"
+        Int16(1284)
+    }
+    
+
+}
+
+struct CustomData: DataConvertible {
+    var data: Data {
+        Data()
+    }    
 }

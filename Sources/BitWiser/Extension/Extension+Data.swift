@@ -18,6 +18,17 @@ extension Data: ByteRepresentable {
     }
 }
 
+extension Data : DataConvertible {
+    
+    public init?(data: Data) {
+        self.init(data)
+    }
+    
+    public var data: Data {
+        return self
+    }
+}
+
 public extension Data {
     
     /// Option about how to encode the hex string representation
