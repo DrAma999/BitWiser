@@ -31,34 +31,20 @@ public enum DataConvertibleBuilder {
         expression.data
     }
     
-    public static func buildOptional(_ component: [DataConvertible]?) -> Data {
-        let data = component?.reduce(Data()) { partialResult, value in
-            var mutBuffer = partialResult
-            mutBuffer.append(value.data)
-            return mutBuffer
-        }
-        return data ?? Data()
+    public static func buildOptional(_ component: DataConvertible?) -> Data {
+        return component?.data ?? Data()
     }
     
-    public static func buildEither(first component: [DataConvertible]) -> Data {
-        return component.reduce(Data()) { partialResult, value in
-            var mutBuffer = partialResult
-            mutBuffer.append(value.data)
-            return mutBuffer
-        }
+    public static func buildEither(first component: DataConvertible) -> Data {
+        return component.data
     }
     
-    public static func buildEither(second component: [DataConvertible]) -> Data {
-        return component.reduce(Data()) { partialResult, value in
-            var mutBuffer = partialResult
-            mutBuffer.append(value.data)
-            return mutBuffer
-        }
+    public static func buildEither(second component: DataConvertible) -> Data {
+        return component.data
     }
     
-    public static func buildArray(_ components: [[DataConvertible]]) -> Data {
+    public static func buildArray(_ components: [DataConvertible]) -> Data {
         return components
-            .flatMap { $0 }
             .reduce(Data()) { partialResult, value in
                 var mutBuffer = partialResult
                 mutBuffer.append(value.data)

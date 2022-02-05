@@ -9,6 +9,13 @@ import XCTest
 @testable import BitWiser
 
 class DSLTests: XCTestCase {
+    
+    struct CustomData: DataConvertible {
+        var data: Data {
+            withUnsafeBytes(of: UInt8(6)) { Data($0) }
+        }
+    }
+
         
     @ByteArrayBuilder func buildArrayOfBytesFromVaridicBytes() -> [Byte] {
         Byte(0x00)
@@ -34,14 +41,14 @@ class DSLTests: XCTestCase {
         [UInt8](repeating: 0x04, count: 1)
     }
     
-    var clause = true
+    var byteArrayClause = true
     
     @ByteArrayBuilder func buildArrayOfBytesFromVaridicMixedByteArrayOfBytesIfClause() -> [Byte] {
         [Byte(0x00)]
         Byte(0x01)
         0x02
         [UInt8(0x03)]
-        if clause {
+        if byteArrayClause {
             [UInt8](repeating: 0x04, count: 1)
         }
     }
@@ -51,7 +58,7 @@ class DSLTests: XCTestCase {
         Byte(0x01)
         0x02
         [UInt8(0x03)]
-        if clause {
+        if byteArrayClause {
             [UInt8](repeating: 0x04, count: 1)
         } else {
             0x04
@@ -94,7 +101,15 @@ class DSLTests: XCTestCase {
     }
     
     func testArrayOfBytesFromVaridicMixedByteArrayOfBytesIfClause() throws {
-        let value = buildArrayOfBytesFromVaridicMixedByteArrayOfBytesIfClause()
+        byteArrayClause = true
+        var value = buildArrayOfBytesFromVaridicMixedByteArrayOfBytesIfClause()
+        value.enumerated().forEach { (index, value) in
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
+        }
+        
+        byteArrayClause = false
+        value = buildArrayOfBytesFromVaridicMixedByteArrayOfBytesIfClause()
         value.enumerated().forEach { (index, value) in
             let uIndex = UInt8(index)
             XCTAssertEqual(uIndex, value)
@@ -102,11 +117,20 @@ class DSLTests: XCTestCase {
     }
     
     func testArrayOfBytesFromVaridicMixedByteArrayOfBytesIfElseClause() throws {
-        let value = buildArrayOfBytesFromVaridicMixedByteArrayOfBytesIfElseClause()
+        byteArrayClause = true
+        var value = buildArrayOfBytesFromVaridicMixedByteArrayOfBytesIfElseClause()
         value.enumerated().forEach { (index, value) in
             let uIndex = UInt8(index)
             XCTAssertEqual(uIndex, value)
         }
+        
+        byteArrayClause = false
+        value = buildArrayOfBytesFromVaridicMixedByteArrayOfBytesIfElseClause()
+        value.enumerated().forEach { (index, value) in
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
+        }
+
     }
     
     func testArrayOfBytesFromVaridicMixedByteArrayOfBytesLoop() throws {
@@ -135,6 +159,8 @@ class DSLTests: XCTestCase {
         XCTAssertEqual(dslData, dataFromValue)
     }
     
+    var dataClause = true
+    
     @DataConvertibleBuilder func buildDataFromVaridicData() -> Data {
         UInt8(0)
         UInt8(1)
@@ -157,13 +183,113 @@ class DSLTests: XCTestCase {
         Int8(2)
         "\u{03}"
         Int16(1284)
+        CustomData()
     }
     
+    @DataConvertibleBuilder func buildDataFromVaridicMixedDataIfClause() -> Data {
+        [UInt8(0)]
+        UInt8(1)
+        Int8(2)
+        "\u{03}"
+        Int16(1284)
+        if dataClause {
+            CustomData()
+        }
+    }
+    
+    @DataConvertibleBuilder func buildDataFromVaridicMixedDataIfElseClause() -> Data {
+        [UInt8(0)]
+        UInt8(1)
+        Int8(2)
+        "\u{03}"
+        Int16(1284)
+        if dataClause {
+            CustomData()
+        } else {
+            UInt8(6)
+            UInt8(7)
+        }
+    }
+    
+    @DataConvertibleBuilder func buildDataFromVaridicMixedDataLoop() -> Data {
+        [UInt8(0)]
+        UInt8(1)
+        Int8(2)
+        "\u{03}"
+        Int16(1284)
+        for value in [UInt8(6), UInt8(7)] {
+            value
+        }
+    }
+    
+    func testDataFromVaridicData() throws {
+        let value = buildDataFromVaridicData()
+        value.enumerated().forEach { (index, value) in
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
+        }
+    }
+    
+    func testDataFromVaridicDataArrayOfData() throws {
+        let value = buildDataFromVaridicDataArrayOfData()
+        value.enumerated().forEach { (index, value) in
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
+        }
+    }
+
+    func testDataFromVaridicMixedData() throws {
+        let value = buildDataFromVaridicMixedData()
+        value.enumerated().forEach { (index, value) in
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
+        }
+    }
+
+    func testDataFromVaridicMixedDataIfClause() throws {
+        dataClause = true
+
+        var value = buildDataFromVaridicMixedDataIfClause()
+        value.enumerated().forEach { (index, value) in
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
+        }
+        
+        dataClause = false
+        
+        value = buildDataFromVaridicMixedDataIfClause()
+        value.enumerated().forEach { (index, value) in
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
+        }
+    }
+
+    func testDataFromVaridicMixedDataIfElseClause() throws {
+        dataClause = true
+
+        var value = buildDataFromVaridicMixedDataIfElseClause()
+        value.enumerated().forEach { (index, value) in
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
+        }
+        
+        dataClause = false
+        
+        value = buildDataFromVaridicMixedDataIfElseClause()
+        value.enumerated().forEach { (index, value) in
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
+        }
+
+    }
+
+    func testDataFromVaridicMixedDataLoop() throws {
+        let value = buildDataFromVaridicMixedDataLoop()
+        value.enumerated().forEach { (index, value) in
+            let uIndex = UInt8(index)
+            XCTAssertEqual(uIndex, value)
+        }
+    }
 
 }
 
-struct CustomData: DataConvertible {
-    var data: Data {
-        Data()
-    }    
-}
