@@ -146,9 +146,10 @@ class DSLTests: XCTestCase {
         let bytes = value.bytes
         let dataFromValue = Data(bytes: bytes)
         
+        // Must use UInt8 to define the lenght
         let dslData = Data {
-            0b1010_1010
-            0b1100_1100
+            Byte(0b1010_1010)
+            Byte(0b1100_1100)
         }
         
         let dslByteArray = Array<Byte> {

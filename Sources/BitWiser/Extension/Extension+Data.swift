@@ -57,18 +57,21 @@ public extension Data {
 }
 
 public extension Data {
-    /// Initialize a `Data` with a `@ByteArrayBuilder`.
+
+    /// Initialize a `Data` with a `@DataConvertibleBuilder`.
     ///
     ///     Data {
     ///         [Byte(0x00)]
     ///         Byte(0x01)
     ///         0x02
-    ///         [UInt8(0x03)]
+    ///         "\u{03}"
+    ///         CustomObject()
     ///     }
-    ///     
-    /// - parameter builder: A DSL closure with `Byte`s.
-    /// - Important: Always start from the LSB
-    init(@ByteArrayBuilder _ builder: () -> [Byte]) {
-        self.init(bytes: builder())
+    ///
+    /// - parameter representables: A DSL closure with `DataRepresentable`s. Object passed in the closure must conform to `DataRepresentable` protocol.
+    /// - Note: Objects passed in the closure can have different `Data` lenght.
+    /// - Important: Always start from the LSB.
+    init(@DataConvertibleBuilder _ representables: () -> Data) {
+        self.init(representables())
     }
 }
