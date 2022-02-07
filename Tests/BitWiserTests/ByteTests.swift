@@ -16,7 +16,7 @@ class ByteTests: XCTestCase {
         var hexDescription = value.hexDescription
         XCTAssertTrue(binDescription == "00000000")
         XCTAssertTrue(hexDescription == "00")
-
+        
         value = 0b11111111
         binDescription = value.binaryDescription
         hexDescription = value.hexDescription

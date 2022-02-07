@@ -18,6 +18,17 @@ extension Data: ByteRepresentable {
     }
 }
 
+extension Data : DataConvertible {
+    
+    public init?(data: Data) {
+        self.init(data)
+    }
+    
+    public var data: Data {
+        return self
+    }
+}
+
 public extension Data {
     
     /// Option about how to encode the hex string representation
@@ -42,5 +53,25 @@ public extension Data {
         return self.map {
             String(format: format, $0)
         }.joined(separator: padding)
+    }
+}
+
+public extension Data {
+
+    /// Initialize a `Data` with a `@DataConvertibleBuilder`.
+    ///
+    ///     Data {
+    ///         [Byte(0x00)]
+    ///         Byte(0x01)
+    ///         0x02
+    ///         "\u{03}"
+    ///         CustomObject()
+    ///     }
+    ///
+    /// - parameter representables: A DSL closure with `DataRepresentable`s. Object passed in the closure must conform to `DataRepresentable` protocol.
+    /// - Note: Objects passed in the closure can have different `Data` lenght.
+    /// - Important: Always start from the LSB.
+    init(@DataConvertibleBuilder _ representables: () -> Data) {
+        self.init(representables())
     }
 }

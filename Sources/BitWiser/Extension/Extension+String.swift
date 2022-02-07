@@ -7,6 +7,18 @@
 
 import Foundation
 
+extension String: DataConvertible {
+    
+    public init?(data: Data) {
+        self.init(data: data, encoding: .utf8)
+    }
+    
+    public var data: Data {
+        // Note: a conversion to UTF-8 cannot fail.
+        return Data(self.utf8)
+    }
+}
+
 public extension String {
     /// Given a hex string it returns a Data
     /// - Returns: a `Data` value
