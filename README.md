@@ -16,6 +16,7 @@ The project is in early stages of development feel free to make pull requests fo
 ## FEATURES
 * No more bit masking. Access single bit values 
 * Coverting from bytes array to `Data` and back has never been easier
+* Nice DSL for creating byte array and `Data`
 * Print `Data` into hex string
 * Set, reset, query, toggle each bit
 * Subscript
@@ -70,7 +71,7 @@ value.setBit(0)
 // Reset the specified bit to 0
 value.resetBit(0)
 // Toggle the specified bit. If the bit in position zero is one it becomes zero and viceversa
-value.resetBit(0)
+value.toggleBit(0)
 // Change the value of the specified bit to one
 value.changeBit(0, to: .one )
 
@@ -94,6 +95,33 @@ With bit wiser you can extract nibbles from a byte:
 ```
 
 There are also a lot of methods and facilities to work with bit bites and nibbles.
+
+## DSL
+BitWiser provides a DSL for creating byte arrays or `Data` objects.
+DSL is compatible with `if` `else` and `for` and is compatible with any object that conforms to `DataRepresentable`.
+Here and example to create a `Data` object:
+```
+Data {
+        [UInt8(0)]
+        UInt8(1)
+        Int8(2)
+        "\u{03}"
+        Int16(1284)
+        if dataClause {
+            CustomData()
+        }
+    }
+```
+and a byte array:
+```
+Array<Byte> {
+            0b1010_1010
+            0b1100_1100
+            UInt8(32)
+            [0x05, 0x06]
+            Byte(0x01)
+        }
+```
 
 ## CONTRIBUTING
 Since I'm working on this project in my spare time any help is appreciated.
